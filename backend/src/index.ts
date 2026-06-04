@@ -100,6 +100,29 @@ app.post("/quizzes", async (req, res) => {
   }
 });
 
+app.delete("/quizzes/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const existingQuiz = await prisma.quiz.findUnique({
+      where: { id },
+    });
+
+    if (!existingQuiz) {
+      return res.status(404).json({ message: "Quiz not found" });
+    }
+
+    await prisma.quiz.delete({
+      where: { id },
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    console.error("DELETE /quizzes/:id failed:", error);
+    res.status(500).json({ message: "Failed to delete quiz" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`API listening on http://localhost:${port}`);
 });
