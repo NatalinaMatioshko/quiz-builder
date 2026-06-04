@@ -1,6 +1,7 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import { Prisma } from "@prisma/client";
 import { prisma } from "./prisma.js";
 
 dotenv.config();
@@ -80,10 +81,16 @@ app.post("/quizzes", async (req, res) => {
         title,
         questions: {
           create: questions.map(
-            (question: { type: string; label: string; options?: unknown }) => ({
+            (question: {
+              type: string;
+              label: string;
+              options?: Prisma.InputJsonValue;
+            }) => ({
               type: question.type,
               label: question.label,
-              options: question.options ?? null,
+              ...(question.options !== undefined
+                ? { options: question.options }
+                : {}),
             }),
           ),
         },
