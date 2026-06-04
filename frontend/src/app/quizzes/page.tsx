@@ -37,6 +37,32 @@ export default function QuizzesPage() {
     fetchQuizzes();
   }, []);
 
+  const handleDelete = async (
+    event: React.MouseEvent<HTMLButtonElement>,
+    quizId: string,
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const confirmed = window.confirm("Delete this quiz?");
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/quizzes/${quizId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete quiz");
+      }
+
+      setQuizzes((prev) => prev.filter((quiz) => quiz.id !== quizId));
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete quiz.");
+    }
+  };
+
   if (loading) {
     return <p className="text-gray-600">Loading quizzes...</p>;
   }
@@ -66,10 +92,22 @@ export default function QuizzesPage() {
               href={`/quizzes/${quiz.id}`}
               className="block rounded-lg border p-4 transition hover:bg-gray-50"
             >
-              <h2 className="text-xl font-semibold">{quiz.title}</h2>
-              <p className="mt-1 text-sm text-gray-600">
-                Questions: {quiz.questionsCount}
-              </p>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h2 className="text-xl font-semibold">{quiz.title}</h2>
+                  <p className="mt-1 text-sm text-gray-600">
+                    Questions: {quiz.questionsCount}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={(event) => handleDelete(event, quiz.id)}
+                  className="rounded-md border px-3 py-2 text-sm text-red-600 hover:bg-red-50"
+                >
+                  Delete
+                </button>
+              </div>
             </Link>
           ))}
         </div>
