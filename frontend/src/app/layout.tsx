@@ -14,9 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-white text-gray-900">
-        <header className="border-b">
-          <nav className="mx-auto flex max-w-5xl items-center gap-6 px-6 py-4">
+      <body className="min-h-screen bg-gray-50 text-gray-900">
+        <header className="border-b bg-white/90 backdrop-blur">
+          <nav className="mx-auto flex max-w-4xl items-center justify-between px-4 py-4 sm:px-6">
             <Link href="/" className="font-semibold">
               Quiz Builder
             </Link>
@@ -34,8 +34,7 @@ export default function RootLayout({
             </Link>
           </nav>
         </header>
-
-        <main className="mx-auto max-w-5xl px-6 py-8">{children}</main>
+        <main className="mx-auto max-w-4xl px-4 py-8 sm:px-6">{children}</main>
       </body>
     </html>
   );

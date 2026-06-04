@@ -90,7 +90,7 @@ export default function QuizzesPage() {
             <Link
               key={quiz.id}
               href={`/quizzes/${quiz.id}`}
-              className="block rounded-lg border p-4 transition hover:bg-gray-50"
+              className="block rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>

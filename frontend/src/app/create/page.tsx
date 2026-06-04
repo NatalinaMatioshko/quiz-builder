@@ -191,7 +191,7 @@ export default function CreateQuizPage() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="rounded-lg border p-4">
+        <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
           <label className="mb-2 block text-sm font-medium">Quiz title</label>
           <input
             type="text"
@@ -206,7 +206,7 @@ export default function CreateQuizPage() {
           {questions.map((question, questionIndex) => (
             <div
               key={questionIndex}
-              className="rounded-lg border p-4 space-y-4"
+              className="space-y-4 rounded-xl border border-gray-200 bg-white p-5 shadow-sm"
             >
               <div className="flex items-center justify-between gap-4">
                 <h2 className="text-lg font-semibold">

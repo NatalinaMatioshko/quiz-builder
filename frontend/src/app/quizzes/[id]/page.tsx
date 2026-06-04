@@ -73,7 +73,7 @@ export default function QuizDetailsPage() {
       <div className="space-y-4">
         {quiz.questions.map((question, index) => (
           <div key={question.id} className="rounded-lg border p-4">
-            <p className="text-sm text-gray-500">
+            <p className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
               Question {index + 1} · {question.type}
             </p>
 
